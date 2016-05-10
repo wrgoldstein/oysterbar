@@ -1,0 +1,38 @@
+<div class='orders-sub'>
+  <div class='text-label'>
+    Status
+  </div>
+  <div class='text-accent text-purple'><%= @order.status %></div>
+</div>
+
+<div class='orders-sub'>
+  <div class='text-label'>
+    Activation code
+  </div>
+  <div class='text-accent'><%= @order.activation_code %></div>
+</div>
+
+<div class='orders-sub'>
+  <div class='text-label'>
+    Name
+  </div>
+  <div class='text-accent'><%= @order.name %></div>
+</div>
+
+<div class='orders-sub'>
+  <div class='text-label'>
+    Phone Number
+  </div>
+  <div class='text-accent'><%= @order.phone %></div>
+</div>
+
+<div class='orders-sub'>
+  <div class='text-label'>
+    Order
+  </div>
+  <div class='orders-show-oysters'>
+    <% @oysters.each do |oyster| %>
+      <div class='text-accent'><%= "#{oyster[0]}: #{oyster[1]}" %></div>
+    <% end %>
+  </div>
+</div>

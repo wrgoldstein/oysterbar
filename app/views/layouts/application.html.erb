@@ -4,11 +4,17 @@
   <title>Oysterbar</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link href='https://fonts.googleapis.com/css?family=Crimson+Text|Armata' rel='stylesheet' type='text/css'>
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+  <div class='header'>
+    <div class='header-logo'>
+      <%= link_to 'Oyster Bar', root_path %>
+    </div>
+  </div>
+  <div class='container'>
+    <%= yield %>
+  </div>
 </body>
 </html>
