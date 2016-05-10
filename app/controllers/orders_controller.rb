@@ -5,12 +5,11 @@ class OrdersController < ApplicationController
 
   def create
     puts 'Create called', params[:orders]
-    @order = Order.new
-    params[:orders].each do |name, count|
+    @order = Order.new(params[:orders].permit(:name, :phone))
+    params[:orders][:oysters].each do |name, count|
       oyster = Oyster.where(name: name).first
-      binding.pry
       return unless oyster
-      OrdersOyster.create! order: @order, oyster: oyster, count: count
+      OrdersOyster.create!(order: @order, oyster: oyster, count: count) if !count.blank?
     end
 
     if @order.save
@@ -19,5 +18,9 @@ class OrdersController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def show
+    @order = Order.where(activation_code: params[:activation_code]).first
   end
 end

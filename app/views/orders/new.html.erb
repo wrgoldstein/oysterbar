@@ -1,12 +1,11 @@
-<%= form_for :orders, url: orders_path do |f| %>
-  <%= f.label "Your name" %>
-  <%= f.text_field(:name) %>
-  <%= f.label "Phone number" %>
-  <%= f.text_field(:phone) %>
+<%= form_tag '/orders', method: :post do %>
+  <%= label_tag "Your name" %>
+  <%= text_field_tag 'orders[name]' %>
+  <%= label_tag "Phone number" %>
+  <%= text_field_tag 'orders[phone]' %>
   <% Oyster.all.each do |oyster| %>
-    <%= oyster.name %>
-    <%= label_tag 'oysters', "Number of oysters" %>
-    <%= number_field_tag 'count', in: 0..5 %>
+    <%= label_tag oyster.name %>
+    <%= number_field_tag "orders[oysters][#{oyster.name}]", in: 0..5 %>
   <% end %>
-  <%= f.submit %>
+  <%= submit_tag 'Submit order' %>
 <% end %>

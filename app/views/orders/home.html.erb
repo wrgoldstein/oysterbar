@@ -1,0 +1,13 @@
+Welcome to Oyster Order
+
+<div class='orders_link'>
+  <%= link_to 'See Orders', orders_path %>
+</div>
+
+<div class='activation_link'>
+  <%= form_tag '/orders/show', method: :get do %>
+    <%= label_tag "Enter code here" %>
+    <%= text_field_tag 'activation_code' %>
+    <%= submit_tag 'Submit code' %>
+  <% end %>
+</div>
