@@ -1,21 +1,36 @@
 <div class='new-order-form'>
   <%= form_tag '/orders', method: :post do %>
     <div class='orders-sub text-label'>
-      <%= label_tag "Your name" %>
-      <%= text_field_tag 'orders[name]' %>
+      <div class='col-half left'>
+        <%= label_tag "Your name" %>
+      </div>
+      <div class='col-half right'>
+        <%= text_field_tag 'orders[name]' %>
+      </div>
     </div>
     <div class='orders-sub text-label'>
-      <%= label_tag "Phone number" %>
-      <%= text_field_tag 'orders[phone]' %>
+      <div class='col-half left'>
+        <%= label_tag "Phone number" %>
+      </div>
+      <div class='col-half right'>
+        <%= text_field_tag 'orders[phone]' %>
+      </div>
     </div>
     <% Oyster.all.each do |oyster| %>
       <div class='orders-sub text-label'>
-        <%= label_tag oyster.name %>
-        <%= number_field_tag "orders[oysters][#{oyster.name}]", in: 0..5 %>
+        <div class='col-half left'>
+          <%= label_tag oyster.name %>
+        </div>
+        <div class='col-half right'>
+          <%= number_field_tag "orders[oysters][#{oyster.name}]", in: 0..5 %>
+        </div>
       </div>
     <% end %>
     <div class='orders-sub'>
-      <%= submit_tag 'Submit order' %>
+      <div class='col-half left'></div>
+      <div class='col-half right'>
+        <%= submit_tag 'Submit order' %>
+      </div>
     </div>
   <% end %>
 </div>
