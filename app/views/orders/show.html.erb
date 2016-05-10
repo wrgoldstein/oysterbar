@@ -1,9 +1,31 @@
-<div class=''>
-  Your activation code is:
-  <%= @order.activation_code %>
+<div class='orders-sub'>
+  <div class='text-label'>
+    Activation code
+  </div>
+  <div class='text-accent'><%= @order.activation_code %></div>
 </div>
 
-<div class=''>
-  Your order is:
-  <%= @order.orders_oysters.as_json %>
+<div class='orders-sub'>
+  <div class='text-label'>
+    Name
+  </div>
+  <div class='text-accent'><%= @order.name %></div>
+</div>
+
+<div class='orders-sub'>
+  <div class='text-label'>
+    Phone Number
+  </div>
+  <div class='text-accent'><%= @order.phone %></div>
+</div>
+
+<div class='orders-sub'>
+  <div class='text-label'>
+    Order
+  </div>
+  <div class='orders-show-oysters'>
+    <% @oysters.each do |oyster| %>
+      <div class='text-accent'><%= "#{oyster[0]}: #{oyster[1]}" %></div>
+    <% end %>
+  </div>
 </div>

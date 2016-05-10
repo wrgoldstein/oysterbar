@@ -13,14 +13,26 @@ class OrdersController < ApplicationController
     end
 
     if @order.save
-      flash[:success] = "New order created"
-      render json: @order.attributes.merge(oysters: @order.orders_oysters.map(&:attributes)).as_json
+      redirect_to order_path(@order.id)
     else
       render 'new'
     end
   end
 
   def show
-    @order = Order.where(activation_code: params[:activation_code]).first
+    if params[:id]
+      @order = Order.find(params[:id])
+    elsif params[:activation_code]
+      @order = Order.where(activation_code: params[:activation_code]).first
+    else
+      flash[:error]
+      redirect_to root_path
+    end
+    @oysters = []
+    @order.orders_oysters.each do |order_oyster|
+      return if order_oyster.count.blank?
+      oyster_name = Oyster.find(order_oyster.oyster_id).name
+      @oysters << [oyster_name, order_oyster.count]
+    end
   end
 end
