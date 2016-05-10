@@ -27,6 +27,21 @@ a {
   padding-top: 15px;
 }
 
+.col-half {
+  width: 50%;
+  float: left;
+  display: block;
+  padding-top: 15px;
+}
+
+.left {
+  text-align: right;
+}
+
+.right {
+  text-align: left;
+}
+
 .orders-sub {
   padding: 20px;
 }
