@@ -22,11 +22,26 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.where(activation_code: params[:activation_code]).first
-    @oysters = []
-    @order.orders_oysters.each do |order_oyster|
-      return if order_oyster.count.blank?
-      oyster_name = Oyster.find(order_oyster.oyster_id).name
-      @oysters << [oyster_name, order_oyster.count]
+    unless @order
+      render 'new'
+      return
     end
+  end
+
+  def index
+    # @done_orders = Order.where(status: 'Done').all
+    # @done_orders
+
+    # {
+    #   name
+    #   phone
+    #   oysters: {
+    #     blue: 10
+    #   }
+    #   status
+    # }
+
+
+    @pending_orders = Order.where(status: 'Pending').all
   end
 end
