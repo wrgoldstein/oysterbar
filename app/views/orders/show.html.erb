@@ -31,7 +31,7 @@
     Order
   </div>
   <div class='orders-show-oysters'>
-    <% @oysters.each do |oyster| %>
+    <% @order.formatted_oysters.each do |oyster| %>
       <div class='text-accent'><%= "#{oyster[0]}: #{oyster[1]}" %></div>
     <% end %>
   </div>
