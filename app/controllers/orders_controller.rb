@@ -29,19 +29,21 @@ class OrdersController < ApplicationController
   end
 
   def index
-    # @done_orders = Order.where(status: 'Done').all
-    # @done_orders
+    if params[:status] == 'Pending'
+      @status = 'Pending'
+      @orders = Order.where(status: 'Pending').all
+    elsif params[:status] == 'Done'
+      @status = 'Done'
+      @orders = Order.where(status: 'Done').all
+    else
+      @status = 'All'
+      @orders = [Order.where(status: 'Pending').all, Order.where(status: 'Done').all].flatten
+    end
+  end
 
-    # {
-    #   name
-    #   phone
-    #   oysters: {
-    #     blue: 10
-    #   }
-    #   status
-    # }
-
-
-    @pending_orders = Order.where(status: 'Pending').all
+  def done
+    @order = Order.find(params[:id])
+    @order.update_attributes!(status: 'Done')
+    redirect_to orders_path(status: 'Pending') # can be smarter here
   end
 end

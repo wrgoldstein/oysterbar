@@ -24,7 +24,6 @@ a {
 }
 
 .container {
-  padding-top: 15px;
 }
 
 .col-half {
@@ -42,6 +41,10 @@ a {
   text-align: left;
 }
 
+.center {
+  text-align: center;
+}
+
 .orders-sub {
   padding: 20px;
 }
@@ -51,6 +54,7 @@ a {
   text-transform: uppercase;
   font-family: Armata;
   padding-bottom: 5px;
+  padding-top: 5px;
   font-weight: bold;
   a:visited {
     color: black;
@@ -67,6 +71,12 @@ a {
   color: #6666c1;
 }
 
+.text-important {
+  text-transform: uppercase;
+  font-family: Armata;
+  font-weight: bold;
+}
+
 input {
   font-family: Crimson Text;
   font-size: 20px;
@@ -80,7 +90,7 @@ input:focus {
   outline: none;
 }
 
-input[type="submit"] {
+.orders-button {
   border: 2px solid #6666c1;
   color: black;
   background-color: white;
@@ -95,6 +105,7 @@ input[type="submit"] {
     color: #6666c1;
   }
 }
+
 input[type="submit"]:disabled {
   border: 1px solid gray;
   color: gray;
@@ -116,5 +127,52 @@ input[type="number"] {
   label {
     width: 100px;
     text-align: right;
+  }
+}
+
+.orders-index {
+  .col-small {
+    width: 26%;
+    float: left;
+    display: block;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .col-mid {
+    width: 37%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    float: left;
+    display: block;
+  }
+  .orders-each-order {
+    padding-bottom: 20px;
+    text-align: left;
+    clear: both;
+    border-top: 1px dashed #6666c1;
+    .text-label {
+      font-size: 17px;
+    }
+    .orders-sub {
+      padding: 5px;
+    }
+  }
+  .orders-index-categories {
+    clear: both;
+    padding-top: 7px;
+    padding-bottom: 5px;
+    font-size: 15px;
+    background-color: #e4e4f4;
+  }
+  .orders-button {
+    padding: 5px;
+    width: 100px;
+    text-align: center;
+    float: right;
+    margin-top: 5px;
+  }
+  a:-webkit-any-link{
+    color: inherit !important;
   }
 }
