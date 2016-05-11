@@ -22,6 +22,10 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.where(activation_code: params[:activation_code]).first
+    unless @order
+      render 'new'
+      return
+    end
     @oysters = []
     @order.orders_oysters.each do |order_oyster|
       return if order_oyster.count.blank?
