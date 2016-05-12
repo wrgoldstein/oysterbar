@@ -9,7 +9,7 @@ class Order < ActiveRecord::Base
   def set_activation_code
     self.activation_code = nil
     while self.activation_code == nil
-      word = RandomWord.nouns.next
+      word = Wordlist::WORDS.sample
       if Order.where(activation_code: word).first
         break
       else

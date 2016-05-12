@@ -137,6 +137,8 @@ input[type="number"] {
   width: 80%;
   text-align: center;
   margin: 0 auto;
+  -webkit-appearance: none;
+  border-radius: 0;
   &:hover {
     cursor: pointer;
     cursor: hand;

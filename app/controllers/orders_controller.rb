@@ -21,14 +21,14 @@ class OrdersController < ApplicationController
 
     if @order.errors.blank? && @order.save
       @order.send_initial_message
-      redirect_to order_path(activation_code: @order.activation_code, id: @order.id)
+      redirect_to order_path(activation_code: @order.activation_code.downcase, id: @order.id)
     else
       render 'new'
     end
   end
 
   def show
-    @order = Order.where(activation_code: params[:activation_code]).first
+    @order = Order.where(activation_code: params[:activation_code].downcase).first
     unless @order
       render 'new'
       return
