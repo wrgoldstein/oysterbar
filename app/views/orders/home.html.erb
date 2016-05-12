@@ -7,10 +7,8 @@
 <div class='orders-sub activation-form'>
   <%= form_tag '/orders/show', method: :get do %>
     <div class='orders-sub'>
-      <%= text_field_tag 'activation_code', nil, placeholder: 'Activation code' %>
+      <%= text_field_tag 'activation_code', nil, placeholder: 'Code' %>
     </div>
-    <div class='orders-sub'>
-      <%= submit_tag 'See Status', id: 'activation_code_submit', class: 'orders-button' %>
-    </div>
+    <%= submit_tag 'See Status', id: 'activation_code_submit', class: 'orders-button' %>
   <% end %>
 </div>

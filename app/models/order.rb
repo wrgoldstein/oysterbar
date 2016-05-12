@@ -1,5 +1,4 @@
 class Order < ActiveRecord::Base
-  require 'random_word_generator'
   before_create :set_activation_code
 
   has_and_belongs_to_many :oysters
@@ -10,7 +9,7 @@ class Order < ActiveRecord::Base
   def set_activation_code
     self.activation_code = nil
     while self.activation_code == nil
-      word = RandomWordGenerator.word
+      word = RandomWord.nouns.next
       if Order.where(activation_code: word).first
         break
       else
@@ -52,6 +51,10 @@ class Order < ActiveRecord::Base
   end
 
   def send_reminder_message
-
+    twilio_client.messages.create(
+      to: phone,
+      from: ENV['TWILIO_PHONE_NUMBER'],
+      body: "Hi #{name}! Your order is ready. Get it while it's cold."
+    )
   end
 end

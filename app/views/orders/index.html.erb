@@ -1,9 +1,5 @@
 <div class='orders-index'>
   <div class='orders-index-categories center'>
-    <span class="text-important <%= 'text-purple' if @status == 'All' %>">
-      <%= link_to 'All', orders_path(status: 'All') %>
-    </span>
-    <span> | </span>
     <span class="text-important <%= 'text-purple' if @status == 'Pending' %>">
       <%= link_to 'Pending', orders_path(status: 'Pending') %>
     </span>
@@ -12,58 +8,36 @@
       <%= link_to 'Completed', orders_path(status: 'Done') %>
     </span>
   </div>
-  <div class='col-mid left'>
-    <div class='text-label'>
-      Status
-    </div>
-  </div>
-  <div class='col-small'>
-    <div class='text-label'>
-      Order
-    </div>
-  </div>
-  <div class='col-mid right'>
-    <div class='text-label'>
-      Name / Phone
-    </div>
-  </div>
   <% @orders.each do |order| %>
     <div class='orders-each-order'>
-      <div class='col-mid left'>
-        <% if order.status == 'Pending' %>
-          <div class='orders-sub'>
-            <div class='orders-button'>
-              <%= link_to 'Mark Done', done_order_path(order), method: :post %>
-            </div>
-          </div>
-        <% else %>
-          <div class='orders-sub'>
-            <div class='orders-button'>
-              <%= link_to 'Remind', '/' %>
-            </div>
-          </div>
-        <% end %>
+      <div class='orders-sub'>
+        <div class='text-label'><%= order.name %></div>
       </div>
-      <div class='col-small'>
-        <div class='orders-sub'>
-          <div class='orders-show-oysters'>
-            <% if order.formatted_oysters.present? %>
-              <% order.formatted_oysters.each do |oyster| %>
-                <div class='text-accent'>
-                  <span class='text-purple'><%= "#{oyster[0]}: "%></span>
-                  <span><%= oyster[1]%></span>
-                </div>
-              <% end %>
+      <div class='orders-sub'>
+        <div class='orders-show-oysters'>
+          <% if order.formatted_oysters.present? %>
+            <% order.formatted_oysters.each do |oyster| %>
+              <div class='text-accent'>
+                <span class='text-purple'><%= "#{oyster[0]}: "%></span>
+                <span><%= oyster[1]%></span>
+              </div>
             <% end %>
+          <% end %>
+        </div>
+      </div>
+      <% if order.status == 'Pending' %>
+        <div class='orders-sub'>
+          <div class='orders-button'>
+            <%= link_to 'Mark Done', done_order_path(order), method: :post %>
           </div>
         </div>
-      </div>
-      <div class='col-mid right'>
+      <% else %>
         <div class='orders-sub'>
-          <div class='text-accent'><%= order.name %></div>
-          <div class='text-accent'><%= order.phone %></div>
+          <div class='orders-button'>
+            <%= link_to 'Remind', remind_order_path(order), method: :post %>
+          </div>
         </div>
-      </div>
+      <% end %>
     </div>
   <% end %>
 </div>

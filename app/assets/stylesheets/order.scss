@@ -14,16 +14,6 @@ a {
   text-decoration: none;
 }
 
-.header {
-  padding: 15px;
-  background-color: #6666c1;
-  .header-logo a {
-    font-size: 30px;
-    color: white;
-    font-family: Armata;
-  }
-}
-
 .container {
 }
 
@@ -50,10 +40,6 @@ a {
 
 .center {
   text-align: center;
-}
-
-.orders-sub {
-  padding: 10px;
 }
 
 .text-label {
@@ -84,35 +70,22 @@ a {
   font-weight: bold;
 }
 
+.orders-sub {
+  padding: 10px;
+  padding-top: 20px;
+  text-align: center;
+}
+
 input {
   font-family: Crimson Text;
   font-size: 20px;
   border: none;
   border-bottom: 2px solid black;
   color: gray;
-  padding: 5px;
   text-align: right;
 }
 input:focus {
   outline: none;
-}
-
-.orders-button {
-  border: 2px solid #6666c1;
-  color: black;
-  background-color: white;
-  text-transform: uppercase;
-  font-family: Armata;
-  font-size: 20px;
-  font-weight: bold;
-  padding: 5px;
-  width: 80%;
-  text-align: center;
-  &:hover {
-    cursor: pointer;
-    cursor: hand;
-    color: #6666c1;
-  }
 }
 
 input[type="submit"]:disabled {
@@ -131,41 +104,52 @@ input[type="number"] {
 .activation-form {
   #activation_code {
     text-align: center;
+    width: 80%;
   }
 }
 
 .new-order-form {
+  text-align: left;
   input {
-    text-align: left;
+    text-align: center;
+    width: 90%;
+  }
+  .orders-button {
+    text-align: center;
+  }
+  .number-input {
+    width: 60px;
     margin-left: 10px;
   }
-  label {
-    width: 100px;
-    text-align: right;
+}
+
+.orders-button {
+  border: 2px solid #6666c1;
+  color: black;
+  background-color: white;
+  text-transform: uppercase;
+  font-family: Armata;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 80%;
+  text-align: center;
+  margin: 0 auto;
+  &:hover {
+    cursor: pointer;
+    cursor: hand;
+    color: #6666c1;
   }
 }
 
 .orders-index {
-  .col-small {
-    width: 26%;
-    float: left;
-    display: block;
-    text-align: center;
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-  .col-mid {
-    width: 37%;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    float: left;
-    display: block;
-  }
   .orders-each-order {
-    padding-bottom: 20px;
+    padding: 10px;
     text-align: left;
     clear: both;
-    border-top: 1px dashed #6666c1;
+    border-bottom: 1px dashed #6666c1;
     .text-label {
       font-size: 17px;
     }
@@ -175,20 +159,23 @@ input[type="number"] {
   }
   .orders-index-categories {
     clear: both;
-    padding-top: 7px;
-    padding-bottom: 5px;
+    padding: 10px;
     font-size: 15px;
     background-color: #e4e4f4;
-  }
-  .orders-button {
-    padding: 5px;
-    width: 100px;
-    text-align: center;
-    float: right;
-    margin-top: 5px;
   }
 }
 
 a:-webkit-any-link{
   color: inherit !important;
 }
+
+.header {
+  padding: 15px;
+  background-color: #6666c1;
+  .header-logo a {
+    font-size: 30px;
+    color: white !important;
+    font-family: Armata;
+  }
+}
+

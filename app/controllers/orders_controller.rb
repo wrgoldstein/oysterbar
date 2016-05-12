@@ -36,15 +36,12 @@ class OrdersController < ApplicationController
   end
 
   def index
-    if params[:status] == 'Pending'
-      @status = 'Pending'
-      @orders = Order.where(status: 'Pending').all
-    elsif params[:status] == 'Done'
+    if params[:status] == 'Done'
       @status = 'Done'
       @orders = Order.where(status: 'Done').all
     else
-      @status = 'All'
-      @orders = [Order.where(status: 'Pending').all, Order.where(status: 'Done').all].flatten
+      @status = 'Pending'
+      @orders = Order.where(status: 'Pending').all
     end
   end
 
@@ -53,5 +50,11 @@ class OrdersController < ApplicationController
     @order.update_attributes!(status: 'Done')
     @order.send_ready_message
     redirect_to orders_path(status: 'Pending') # can be smarter here
+  end
+
+  def remind
+    @order = Order.find(params[:id])
+    @order.send_reminder_message
+    redirect_to orders_path(status: 'Done') # can be smarter here
   end
 end

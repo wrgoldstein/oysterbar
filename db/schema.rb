@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160510191724) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "orders", force: :cascade do |t|
     t.string   "name"
     t.string   "phone"
@@ -28,8 +31,8 @@ ActiveRecord::Schema.define(version: 20160510191724) do
     t.integer "count"
   end
 
-  add_index "orders_oysters", ["order_id"], name: "index_orders_oysters_on_order_id"
-  add_index "orders_oysters", ["oyster_id"], name: "index_orders_oysters_on_oyster_id"
+  add_index "orders_oysters", ["order_id"], name: "index_orders_oysters_on_order_id", using: :btree
+  add_index "orders_oysters", ["oyster_id"], name: "index_orders_oysters_on_oyster_id", using: :btree
 
   create_table "oysters", force: :cascade do |t|
     t.string   "name"
