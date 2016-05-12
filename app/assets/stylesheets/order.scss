@@ -7,6 +7,7 @@ body {
   font-size: 20px;
   text-align: center;
   margin: 0px;
+  width: 100%;
 }
 
 a {
@@ -24,6 +25,12 @@ a {
 }
 
 .container {
+}
+
+.error {
+  padding: 10px;
+  background-color: #ff6666;
+  color: white;
 }
 
 .col-half {
@@ -46,7 +53,7 @@ a {
 }
 
 .orders-sub {
-  padding: 20px;
+  padding: 10px;
 }
 
 .text-label {
@@ -94,11 +101,13 @@ input:focus {
   border: 2px solid #6666c1;
   color: black;
   background-color: white;
-  margin-left: 5px;
   text-transform: uppercase;
   font-family: Armata;
-  font-size: 15px;
+  font-size: 20px;
   font-weight: bold;
+  padding: 5px;
+  width: 80%;
+  text-align: center;
   &:hover {
     cursor: pointer;
     cursor: hand;
@@ -117,6 +126,12 @@ input[type="submit"]:disabled {
 input[type="number"] {
   border: 1px solid black;
   width: 40px;
+}
+
+.activation-form {
+  #activation_code {
+    text-align: center;
+  }
 }
 
 .new-order-form {
@@ -172,7 +187,8 @@ input[type="number"] {
     float: right;
     margin-top: 5px;
   }
-  a:-webkit-any-link{
-    color: inherit !important;
-  }
+}
+
+a:-webkit-any-link{
+  color: inherit !important;
 }

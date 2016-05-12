@@ -1,12 +1,16 @@
 <div class='orders-sub'>
-  <div class='text-label'>
+  <div class='orders-button'>
     <%= link_to 'New Order', new_order_path %>
   </div>
 </div>
 
 <div class='orders-sub activation-form'>
   <%= form_tag '/orders/show', method: :get do %>
-    <%= text_field_tag 'activation_code', nil, placeholder: 'Activation code' %>
-    <%= submit_tag 'See Status', id: 'activation_code_submit', class: 'orders-button' %>
+    <div class='orders-sub'>
+      <%= text_field_tag 'activation_code', nil, placeholder: 'Activation code' %>
+    </div>
+    <div class='orders-sub'>
+      <%= submit_tag 'See Status', id: 'activation_code_submit', class: 'orders-button' %>
+    </div>
   <% end %>
 </div>

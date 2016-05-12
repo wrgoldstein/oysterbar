@@ -1,19 +1,22 @@
 <div class='new-order-form'>
+  <% if @order.errors.any? %>
+    <div class='error'>
+      <% @order.errors.messages.each do |attr, message| %>
+        <%= "#{attr.capitalize} #{message.first}" %>
+      <% end %>
+    </div>
+  <% end %>
   <%= form_tag '/orders', method: :post do %>
     <div class='orders-sub text-label'>
-      <div class='col-half left'>
-        <%= label_tag "Your name" %>
-      </div>
-      <div class='col-half right'>
-        <%= text_field_tag 'orders[name]' %>
-      </div>
+      <%= label_tag "Your name" %>
+      <%= text_field_tag 'orders[name]' %>
     </div>
     <div class='orders-sub text-label'>
       <div class='col-half left'>
         <%= label_tag "Phone number" %>
       </div>
       <div class='col-half right'>
-        <%= text_field_tag 'orders[phone]' %>
+        <%= text_field_tag 'orders[phone]', nil, placeholder: '304 123 4567' %>
       </div>
     </div>
     <% Oyster.all.each do |oyster| %>
