@@ -1,6 +1,4 @@
 class OrdersController < ApplicationController
-  MAX_OYSTERS = 5
-
   def new
     @order = Order.new
   end
@@ -12,8 +10,8 @@ class OrdersController < ApplicationController
     params[:orders][:oysters].each do |name, count|
       oyster = Oyster.where(name: name).first
       break unless oyster || @order.errors.any?
-      if count.to_i > MAX_OYSTERS
-        @order.errors.add(:oops!, "Can't order more than #{MAX_OYSTERS} of each oyster!")
+      if count.to_i > oyster.max
+        @order.errors.add(:oops!, "Can't order more than #{oyster.max} of each oyster!")
       else
         OrdersOyster.create!(order: @order, oyster: oyster, count: count) if !count.blank?
       end
@@ -30,8 +28,8 @@ class OrdersController < ApplicationController
   def show
     @order = Order.where(activation_code: params[:activation_code].downcase).first
     unless @order
-      render 'new'
-      return
+      @error = 'Code is invalid.'
+      render 'home'
     end
   end
 

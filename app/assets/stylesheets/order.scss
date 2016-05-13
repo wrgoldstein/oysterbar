@@ -14,7 +14,10 @@ a {
   text-decoration: none;
 }
 
-.container {
+.inner {
+  max-width: 700px;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .error {
@@ -74,6 +77,11 @@ a {
   padding: 10px;
   padding-top: 20px;
   text-align: center;
+}
+
+.available-oysters {
+  width: 80%;
+  margin: 0 auto;
 }
 
 input {

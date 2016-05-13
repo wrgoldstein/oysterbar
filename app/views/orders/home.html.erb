@@ -1,14 +1,35 @@
-<div class='orders-sub'>
-  <div class='orders-button'>
-    <%= link_to 'New Order', new_order_path %>
+<% unless @error.nil? %>
+  <div class='error'>
+    <%= @error %>
   </div>
-</div>
-
-<div class='orders-sub activation-form'>
-  <%= form_tag '/orders/show', method: :get do %>
-    <div class='orders-sub'>
-      <%= text_field_tag 'activation_code', nil, placeholder: 'Code' %>
+<% end %>
+<div class='inner'>
+  <div class='orders-sub available-oysters'>
+    <div class='text-label'>
+      Available oysters
     </div>
-    <%= submit_tag 'See Status', id: 'activation_code_submit', class: 'orders-button' %>
-  <% end %>
+    <div>
+      <% Oyster.all.each do |oyster| %>
+        <div>
+          <%= oyster.name %>
+          <%= oyster.count %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class='orders-options'>
+    <div class='orders-sub'>
+      <div class='orders-button'>
+        <%= link_to 'New Order', new_order_path %>
+      </div>
+    </div>
+    <div class='orders-sub activation-form'>
+      <%= form_tag '/orders/show', method: :get do %>
+        <div class='orders-sub'>
+          <%= text_field_tag 'activation_code', nil, placeholder: 'Code' %>
+        </div>
+        <%= submit_tag 'See Status', id: 'activation_code_submit', class: 'orders-button' %>
+      <% end %>
+    </div>
+  </div>
 </div>

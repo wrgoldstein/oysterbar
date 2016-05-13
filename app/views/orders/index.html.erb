@@ -8,36 +8,38 @@
       <%= link_to 'Completed', orders_path(status: 'Done') %>
     </span>
   </div>
-  <% @orders.each do |order| %>
-    <div class='orders-each-order'>
-      <div class='orders-sub'>
-        <div class='text-label'><%= order.name %></div>
-      </div>
-      <div class='orders-sub'>
-        <div class='orders-show-oysters'>
-          <% if order.formatted_oysters.present? %>
-            <% order.formatted_oysters.each do |oyster| %>
-              <div class='text-accent'>
-                <span class='text-purple'><%= "#{oyster[0]}: "%></span>
-                <span><%= oyster[1]%></span>
-              </div>
+  <div class='inner'>
+    <% @orders.each do |order| %>
+      <div class='orders-each-order'>
+        <div class='orders-sub'>
+          <div class='text-label'><%= order.name %></div>
+        </div>
+        <div class='orders-sub'>
+          <div class='orders-show-oysters'>
+            <% if order.formatted_oysters.present? %>
+              <% order.formatted_oysters.each do |oyster| %>
+                <div class='text-accent'>
+                  <span class='text-purple'><%= "#{oyster[0]}: "%></span>
+                  <span><%= oyster[1]%></span>
+                </div>
+              <% end %>
             <% end %>
-          <% end %>
+          </div>
         </div>
+        <% if order.status == 'Pending' %>
+          <div class='orders-sub'>
+            <div class='orders-button'>
+              <%= link_to 'Mark Done', done_order_path(order), method: :post %>
+            </div>
+          </div>
+        <% else %>
+          <div class='orders-sub'>
+            <div class='orders-button'>
+              <%= link_to 'Remind', remind_order_path(order), method: :post %>
+            </div>
+          </div>
+        <% end %>
       </div>
-      <% if order.status == 'Pending' %>
-        <div class='orders-sub'>
-          <div class='orders-button'>
-            <%= link_to 'Mark Done', done_order_path(order), method: :post %>
-          </div>
-        </div>
-      <% else %>
-        <div class='orders-sub'>
-          <div class='orders-button'>
-            <%= link_to 'Remind', remind_order_path(order), method: :post %>
-          </div>
-        </div>
-      <% end %>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
