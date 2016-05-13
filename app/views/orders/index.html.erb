@@ -13,6 +13,8 @@
       <div class='orders-each-order'>
         <div class='orders-sub'>
           <div class='text-label'><%= order.name %></div>
+          <span class='text-label'>Owes: </span>
+          <span><%= "$#{order.amount_owed}" %></span>
         </div>
         <div class='orders-sub'>
           <div class='orders-show-oysters'>

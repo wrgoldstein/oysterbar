@@ -1,9 +1,12 @@
 class Order < ActiveRecord::Base
   before_create :set_activation_code
+  before_save :send_initial_message
 
   has_and_belongs_to_many :oysters
   has_many :orders_oysters
 
+  validates_presence_of :phone
+  validates_presence_of :name
   validates :phone, phone_number: { ten_digits: true }
 
   def set_activation_code
@@ -35,11 +38,15 @@ class Order < ActiveRecord::Base
   end
 
   def send_initial_message
-    twilio_client.messages.create(
-      to: phone,
-      from: ENV['TWILIO_PHONE_NUMBER'],
-      body: "Hi #{name}! We'll let you know when your order is ready, or you can check the status with code: #{activation_code}"
-    )
+    begin
+      twilio_client.messages.create(
+        to: phone,
+        from: ENV['TWILIO_PHONE_NUMBER'],
+        body: "Hi #{name}! We'll let you know when your order is ready, or you can check the status with code: #{activation_code}. You owe $#{amount_owed}"
+      )
+    rescue Twilio::REST::RequestError => e
+      self.errors.add(:oops, e.message)
+    end
   end
 
   def send_ready_message
@@ -56,5 +63,26 @@ class Order < ActiveRecord::Base
       from: ENV['TWILIO_PHONE_NUMBER'],
       body: "Hi #{name}! Your order is ready. Get it while it's cold."
     )
+  end
+
+  def amount_owed
+    order_oysters = OrdersOyster.where(order_id: id)
+    order_oysters.map{|oo| oo.count}.sum
+  end
+
+  def validate_order_oysters(order_oysters)
+    order_oysters.each do |name, count|
+      oyster = Oyster.where(name: name).first
+      unless oyster
+        self.errors.add(:oops!, "Oyster does not exist.")
+        break
+      end
+      if count.to_i > oyster.max
+        self.errors.add(:darn, "can't order more than #{oyster.max} #{oyster.name} oysters!")
+      end
+      if oyster.count - count.to_i < 0
+        self.errors.add(:shoot, "only #{oyster.count} #{oyster.name} oysters left.")
+      end
+    end
   end
 end

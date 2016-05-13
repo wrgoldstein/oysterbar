@@ -4,25 +4,22 @@ class OrdersController < ApplicationController
   end
 
   def create
-    puts 'Create called', params[:orders]
     @order = Order.new(params[:orders].permit(:name, :phone))
     @order.status = 'Pending'
-    params[:orders][:oysters].each do |name, count|
-      oyster = Oyster.where(name: name).first
-      break unless oyster || @order.errors.any?
-      if count.to_i > oyster.max
-        @order.errors.add(:oops!, "Can't order more than #{oyster.max} of each oyster!")
-      else
-        OrdersOyster.create!(order: @order, oyster: oyster, count: count) if !count.blank?
+    @order.validate_order_oysters(params[:orders][:oysters])
+
+    if @order.errors.blank?
+      if @order.errors.blank? && @order.save
+        params[:orders][:oysters].each do |name, count|
+          oyster = Oyster.where(name: name).first
+          OrdersOyster.create!(order: @order, oyster: oyster, count: count) if !count.blank?
+          oyster.recalculate_count!(count)
+        end
+        redirect_to order_path(activation_code: @order.activation_code.downcase, id: @order.id)
+        return
       end
     end
-
-    if @order.errors.blank? && @order.save
-      @order.send_initial_message
-      redirect_to order_path(activation_code: @order.activation_code.downcase, id: @order.id)
-    else
-      render 'new'
-    end
+    render 'new'
   end
 
   def show
@@ -36,7 +33,7 @@ class OrdersController < ApplicationController
   def index
     if params[:status] == 'Done'
       @status = 'Done'
-      @orders = Order.where(status: 'Done').all
+      @orders = Order.where(status: 'Done').order(created_at: :desc).all
     else
       @status = 'Pending'
       @orders = Order.where(status: 'Pending').all
