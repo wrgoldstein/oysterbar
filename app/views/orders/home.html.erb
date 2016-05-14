@@ -8,13 +8,15 @@
     <div class='text-label'>
       Available oysters
     </div>
-    <div>
+    <div align='center' class='small-text-label'>
+      <table>
       <% Oyster.all.each do |oyster| %>
-        <div>
-          <%= "#{oyster.name}: " %>
-          <%= oyster.count %>
-        </div>
+      <tr>
+        <td><%= "#{oyster.name}: " %></td>
+        <td align='right'><%= oyster.count %></td>
+      </tr>
       <% end %>
+      </table>
     </div>
   </div>
   <div class='orders-options'>

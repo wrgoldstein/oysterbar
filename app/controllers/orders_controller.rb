@@ -43,13 +43,13 @@ class OrdersController < ApplicationController
   def done
     @order = Order.find(params[:id])
     @order.update_attributes!(status: 'Done')
-    @order.send_ready_message
+    @order.send_ready_message if ENV.key? 'TWILIO_ACCOUNT_SID'
     redirect_to orders_path(status: 'Pending') # can be smarter here
   end
 
   def remind
     @order = Order.find(params[:id])
-    @order.send_reminder_message
+    @order.send_reminder_message if ENV.key? 'TWILIO_ACCOUNT_SID'
     redirect_to orders_path(status: 'Done') # can be smarter here
   end
 end

@@ -61,6 +61,21 @@ a {
   }
 }
 
+.small-text-label {
+  font-size: 16px;
+  text-transform: lowercase;
+  font-family: Armata;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  font-weight: bold;
+  a:visited {
+    color: black;
+  }
+  a:hover {
+    color: #6666c1;
+  }
+}
+
 .text-accent {
 }
 
@@ -190,3 +205,4 @@ a:-webkit-any-link{
   }
 }
 
+table { border-spacing: 20px 0; }
