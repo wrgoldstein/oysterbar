@@ -15,6 +15,7 @@ class OrdersController < ApplicationController
           OrdersOyster.create!(order: @order, oyster: oyster, count: count) if !count.blank?
           oyster.recalculate_count!(count)
         end
+        @order.send_initial_message
         redirect_to order_path(activation_code: @order.activation_code.downcase, id: @order.id)
         return
       end

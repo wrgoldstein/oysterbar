@@ -1,6 +1,5 @@
 class Order < ActiveRecord::Base
   before_save :set_activation_code
-  before_save :send_initial_message
 
   has_and_belongs_to_many :oysters
   has_many :orders_oysters
@@ -67,8 +66,7 @@ class Order < ActiveRecord::Base
   end
 
   def amount_owed
-    order_oysters = OrdersOyster.where(order_id: id)
-    order_oysters.map{|oo| oo.count}.sum
+    orders_oysters.pluck(:count).sum
   end
 
   def validate_order_oysters(order_oysters)
