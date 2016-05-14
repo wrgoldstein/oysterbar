@@ -11,7 +11,7 @@
     <div>
       <% Oyster.all.each do |oyster| %>
         <div>
-          <%= oyster.name %>
+          <%= "#{oyster.name}: " %>
           <%= oyster.count %>
         </div>
       <% end %>

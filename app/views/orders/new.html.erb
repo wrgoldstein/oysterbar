@@ -2,7 +2,7 @@
   <% if @order.errors.any? %>
     <div class='error'>
       <% @order.errors.messages.each do |attr, message| %>
-        <%= "#{attr.capitalize} #{message.first}" %>
+        <div><%= "#{attr.capitalize} #{message.first}" %></div>
       <% end %>
     </div>
   <% end %>
@@ -19,7 +19,7 @@
       <% Oyster.all.each do |oyster| %>
         <div class='orders-sub text-label'>
           <%= label_tag oyster.name %>
-          <%= number_field_tag "orders[oysters][#{oyster.name}]", 1, class: 'number-input', in: 0..5 %>
+          <%= number_field_tag "orders[oysters][#{oyster.name}]", 0, class: 'number-input', in: 0..5 %>
         </div>
       <% end %>
       <div class='orders-sub'>
