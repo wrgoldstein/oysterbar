@@ -1,5 +1,5 @@
 class Order < ActiveRecord::Base
-  before_create :set_activation_code
+  before_save :set_activation_code
   before_save :send_initial_message
 
   has_and_belongs_to_many :oysters
