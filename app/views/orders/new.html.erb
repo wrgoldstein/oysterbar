@@ -19,7 +19,7 @@
       <% Oyster.all.each do |oyster| %>
         <div class='orders-sub text-label'>
           <%= label_tag oyster.name %>
-          <%= number_field_tag "orders[oysters][#{oyster.name}]", 0, class: 'number-input', in: 0..5 %>
+          <%= number_field_tag "orders[oysters][#{oyster.name}]", 0, class: 'number-input' %>
         </div>
       <% end %>
       <div class='orders-sub'>

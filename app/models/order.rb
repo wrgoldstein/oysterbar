@@ -38,6 +38,7 @@ class Order < ActiveRecord::Base
   end
 
   def send_initial_message
+    return unless ENV.key? 'TWILIO_ACCOUNT_SID'
     begin
       twilio_client.messages.create(
         to: phone,
@@ -71,6 +72,7 @@ class Order < ActiveRecord::Base
   end
 
   def validate_order_oysters(order_oysters)
+    total_count = 0
     order_oysters.each do |name, count|
       oyster = Oyster.where(name: name).first
       unless oyster
@@ -83,6 +85,8 @@ class Order < ActiveRecord::Base
       if oyster.count - count.to_i < 0
         self.errors.add(:shoot, "only #{oyster.count} #{oyster.name} oysters left.")
       end
+      total_count += count.to_i
     end
+    self.errors.add(:golly, "only 12 oysters per order please.") if total_count > 12
   end
 end
